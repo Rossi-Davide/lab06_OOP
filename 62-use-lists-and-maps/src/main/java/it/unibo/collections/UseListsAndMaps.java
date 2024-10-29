@@ -12,8 +12,8 @@ import java.util.Map;
  */
 public final class UseListsAndMaps {
 
-    private static final int LOWERBOUND_RANGE = 1000;
-    private static final int UPPERBOUND_RANGE = 2000;
+    private static final int MIN_VALUE = 1000;
+    private static final int MAX_VALUE = 2000;
     private static final int ELEMS = 100;
     private static final int READS = 1000;
 
@@ -31,7 +31,7 @@ public final class UseListsAndMaps {
          */
         final ArrayList<Integer> integerArray = new ArrayList<Integer>();
 
-        for(int i = LOWERBOUND_RANGE; i < UPPERBOUND_RANGE; i++){
+        for(int i = MIN_VALUE; i < MAX_VALUE; i++){
             integerArray.add(i);
         }
         
@@ -49,7 +49,7 @@ public final class UseListsAndMaps {
          * element of the first list. You can not use any "magic number".
          * (Suggestion: use a temporary variable)
          */
-        final Integer tmpFirst = integerArray.get(0);
+        final int tmpFirst = integerArray.get(0);
         
         integerArray.set(0, integerArray.get(integerArray.size()-1));
         integerArray.set(integerArray.size()-1, tmpFirst);
@@ -57,9 +57,14 @@ public final class UseListsAndMaps {
         /*
          * 4) Using a single for-each, print the contents of the arraylist.
          */
+        final StringBuilder arrayElems = new StringBuilder();
+
+        arrayElems.append("[");
         for(Integer elem : integerArray){
-            System.out.println(elem);
+            arrayElems.append(elem);
+            arrayElems.append(",");
         }
+        arrayElems.append("]");
         /*
          * 5) Measure the performance of inserting new elements in the head of
          * the collection: measure the time required to add 100.000 elements as
@@ -94,7 +99,7 @@ public final class UseListsAndMaps {
          */
         arrayListTime = System.nanoTime();
 
-        for(int i = 0; i < READS; i++){
+        for(int i = 1; i <= READS; i++){
             integerArray.get(integerArray.size()/2);
         }
 
@@ -102,7 +107,7 @@ public final class UseListsAndMaps {
 
         linkedListTime = System.nanoTime();
 
-        for(int i = 0; i < READS; i++){
+        for(int i = 1; i <= READS; i++){
             integerList.get(integerArray.size()/2);
         }
 
