@@ -96,6 +96,10 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
         return followedUsers.get(circle);
     }
 
+    private Collection<Set<U>> getCircles(){
+        return followedUsers.values();
+    }
+
     private boolean userExists(final String circle, final U user){
         if(!circleExists(circle)){
             return false;
@@ -136,6 +140,12 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
 
     @Override
     public List<U> getFollowedUsers() {
-        return null;
+        final List<U> allFollowedUsers = new ArrayList<>();
+
+        for(Set<U> circle : getCircles()){
+            allFollowedUsers.addAll(circle);
+        }
+
+        return allFollowedUsers;
     }
 }
