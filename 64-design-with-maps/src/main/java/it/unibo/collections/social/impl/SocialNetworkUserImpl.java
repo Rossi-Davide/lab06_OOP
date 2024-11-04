@@ -135,7 +135,7 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      */
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return (getCircle(groupName) == null) ? new HashSet<>() : getCircle(groupName);
+        return (getCircle(groupName) == null) ? new ArrayList<>() : new ArrayList<>(getCircle(groupName));
     }
 
     @Override
