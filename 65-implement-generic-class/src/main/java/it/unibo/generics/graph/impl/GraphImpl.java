@@ -1,5 +1,7 @@
 package it.unibo.generics.graph.impl;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,8 +25,11 @@ public class GraphImpl<N> implements Graph<N>{
 
     @Override
     public void addEdge(N source, N target) {
-        // TODO Auto-generated method stub
-        
+        if(!nodeExists(source) || !nodeExists(target)){
+            return;
+        }
+
+        linkedNodes(source).add(target);
     }
 
     @Override
@@ -44,8 +49,11 @@ public class GraphImpl<N> implements Graph<N>{
 
     @Override
     public Set<N> linkedNodes(N node) {
-        // TODO Auto-generated method stub
-        return null;
+        if(!nodeExists(node)){
+            return null;
+        }
+
+        return graph.get(node);
     }
 
     @Override
