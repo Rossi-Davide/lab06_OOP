@@ -88,6 +88,14 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
         followedUsers.put(circle, new HashSet<>());
     }
 
+    private Set<U> getCircle(final String circle){
+        if(!circleExists(circle)){
+            return null;
+        }
+
+        return followedUsers.get(circle);
+    }
+
     private boolean userExists(final String circle, final U user){
         if(!circleExists(circle)){
             return false;
@@ -112,6 +120,8 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
         }
 
         addUserToCircle(circle, user);
+
+        return true;
     }
 
     /**
@@ -121,7 +131,7 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      */
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return null;
+        return getCircle(groupName);
     }
 
     @Override
