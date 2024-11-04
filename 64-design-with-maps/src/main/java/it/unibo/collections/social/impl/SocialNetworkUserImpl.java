@@ -95,11 +95,23 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
         return followedUsers.get(circle).contains(user);
     }
 
+    private void addUserToCircle(final String circle, final U user){
+        if(circleExists(circle)){
+            followedUsers.get(circle).add(user);
+        }
+    }
+
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
         if(userExists(circle, user)){
             return false;
         }
+
+        if(!circleExists(circle)){
+            createCircle(circle);
+        }
+
+        addUserToCircle(circle, user);
     }
 
     /**
