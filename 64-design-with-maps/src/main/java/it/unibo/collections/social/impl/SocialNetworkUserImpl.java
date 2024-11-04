@@ -79,6 +79,15 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      *
      * Implements the methods below
      */
+    private boolean userExists(final String circle, final U user){
+        if(!followedUsers.containsKey(circle)){
+            return false;
+        }
+        return followedUsers.get(circle).contains(user);
+    }
+
+
+
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
         return false;
